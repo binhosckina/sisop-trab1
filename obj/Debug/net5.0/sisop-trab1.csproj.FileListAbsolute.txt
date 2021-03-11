@@ -14,3 +14,19 @@ C:\Users\i534468\PUCRS\sisop\sisop-trab1\obj\Debug\net5.0\sisop-trab1.dll
 C:\Users\i534468\PUCRS\sisop\sisop-trab1\obj\Debug\net5.0\ref\sisop-trab1.dll
 C:\Users\i534468\PUCRS\sisop\sisop-trab1\obj\Debug\net5.0\sisop-trab1.pdb
 C:\Users\i534468\PUCRS\sisop\sisop-trab1\obj\Debug\net5.0\sisop-trab1.genruntimeconfig.cache
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\sisop-trab1.exe
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\sisop-trab1.deps.json
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\sisop-trab1.runtimeconfig.json
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\sisop-trab1.runtimeconfig.dev.json
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\sisop-trab1.dll
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\ref\sisop-trab1.dll
+D:\aula\Sistemas Operacional\sisop-trab1\bin\Debug\net5.0\sisop-trab1.pdb
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.csprojAssemblyReference.cache
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.GeneratedMSBuildEditorConfig.editorconfig
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.AssemblyInfoInputs.cache
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.AssemblyInfo.cs
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.csproj.CoreCompileInputs.cache
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.dll
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\ref\sisop-trab1.dll
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.pdb
+D:\aula\Sistemas Operacional\sisop-trab1\obj\Debug\net5.0\sisop-trab1.genruntimeconfig.cache

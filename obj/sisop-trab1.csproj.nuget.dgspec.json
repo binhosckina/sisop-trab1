@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\i534468\\PUCRS\\sisop\\sisop-trab1\\sisop-trab1.csproj": {}
+    "D:\\aula\\Sistemas Operacional\\sisop-trab1\\sisop-trab1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\i534468\\PUCRS\\sisop\\sisop-trab1\\sisop-trab1.csproj": {
+    "D:\\aula\\Sistemas Operacional\\sisop-trab1\\sisop-trab1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\i534468\\PUCRS\\sisop\\sisop-trab1\\sisop-trab1.csproj",
+        "projectUniqueName": "D:\\aula\\Sistemas Operacional\\sisop-trab1\\sisop-trab1.csproj",
         "projectName": "sisop-trab1",
-        "projectPath": "C:\\Users\\i534468\\PUCRS\\sisop\\sisop-trab1\\sisop-trab1.csproj",
-        "packagesPath": "C:\\Users\\i534468\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\i534468\\PUCRS\\sisop\\sisop-trab1\\obj\\",
+        "projectPath": "D:\\aula\\Sistemas Operacional\\sisop-trab1\\sisop-trab1.csproj",
+        "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
+        "outputPath": "D:\\aula\\Sistemas Operacional\\sisop-trab1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\i534468\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
