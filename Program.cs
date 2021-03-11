@@ -247,7 +247,6 @@ namespace sisop_trab1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Sistema s = new Sistema();
             s.test2();
             s.test1();
