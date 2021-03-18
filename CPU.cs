@@ -30,50 +30,72 @@
                 switch (ir.opc)
                 { // para cada opcode, sua execução
 
-                    case Opcode.LDI: // Rd ← k
+                    case Opcode.JMP: // 1. PC ← k
+                        pc = ir.p;
+                        break;
+
+                    case Opcode.JMPI: // 2. PC ← k
+                        pc = ir.r1;
+                        break;
+
+                    case Opcode.LDI: // 16. Rd ← k
                         reg[ir.r1] = ir.p;
                         pc++;
                         break;
 
-                    case Opcode.STD: // [A] ← Rs
+                    case Opcode.STD: // 18. [A] ← Rs
                         m[ir.p].opc = Opcode.DATA;
                         m[ir.p].p = reg[ir.r1];
                         pc++;
                         break;
 
-                    case Opcode.ADD: // Rd ← Rd + Rs
+                    case Opcode.ADD: // 13. Rd ← Rd + Rs
                         reg[ir.r1] = reg[ir.r1] + reg[ir.r2];
                         pc++;
                         break;
 
-                    case Opcode.ADDI: // Rd ← Rd + k
+                    case Opcode.ADDI: // 11. Rd ← Rd + k
                         reg[ir.r1] = reg[ir.r1] + ir.p;
                         pc++;
                         break;
 
-                    case Opcode.STX: // [Rd] ←Rs
+                    case Opcode.STX: // 20. [Rd] ←Rs
                         m[reg[ir.r1]].opc = Opcode.DATA;
                         m[reg[ir.r1]].p = reg[ir.r2];
                         pc++;
                         break;
 
-                    case Opcode.SUB: // Rd ← Rd - Rs
+                    case Opcode.SUB: // 14. Rd ← Rd - Rs
                         reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
                         pc++;
                         break;
 
-                    case Opcode.JMPIG: // If Rc > 0 Then PC ← Rs Else PC ← PC +1
+                    case Opcode.JMPIG: // 3. If Rc > 0 Then PC ← Rs Else PC ← PC +1
                         if (reg[ir.r2] > 0)
-                        {
                             pc = reg[ir.r1];
-                        }
                         else
-                        {
                             pc++;
-                        }
                         break;
 
-                    case Opcode.STOP: // por enquanto, para execucao
+                    case Opcode.JMPIM: // 6. PC ← [A]
+                        pc = m[ir.p].p;
+                        break;
+
+                    case Opcode.JMPIGM: // 7. If Rc > 0 Then PC ← [A] Else PC ← PC +1
+                        if (reg[ir.r2] > 0)
+                            pc = m[ir.p].p;
+                        else
+                            pc++;
+                        break;
+
+                    case Opcode.JMPILM: // 8. If Rc < 0 Then PC ← [A] Else PC ← PC +1
+                        if (reg[ir.r2] < 0)
+                            pc = m[ir.p].p;
+                        else
+                            pc++;
+                        break;
+
+                    case Opcode.STOP: // 10. por enquanto, para execucao
                         break;
                 }
 

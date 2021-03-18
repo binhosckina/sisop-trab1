@@ -32,5 +32,20 @@
                 new Word(Opcode.JMPIG, 6, 7, -1),
                 new Word(Opcode.STOP, -1, -1, -1)
             };
+
+        public static Word[] P3 = new Word[] {
+            new Word(Opcode.LDI, 0, -1, -1),
+            new Word(Opcode.STD, 0, -1, 10),
+
+            new Word(Opcode.LDI, 0, -1, -5),
+            // new Word(Opcode.STD, 0, -1, 20),
+            new Word(Opcode.LDI, 1, -1, 5),
+            // new Word(Opcode.STD, 1, -1, 21),
+
+            // new Word(Opcode.JMP, -1, -1, 12),
+
+            new Word(Opcode.JMPILM, -1, 0, 10),
+            new Word(Opcode.STOP, -1, -1, -1)
+        };
     }
 }
