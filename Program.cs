@@ -34,17 +34,26 @@
             };
 
         public static Word[] P3 = new Word[] {
+            new Word(Opcode.LDI, 0, -1, 5),
+
+            new Word(Opcode.DATA, -1, -1, 6), // guarda a posição para o calculo do fatorial
+
+            new Word(Opcode.JMPIGM, -1, 0, 1), // se maior que zero pular para o calculo do fatorial
             new Word(Opcode.LDI, 0, -1, -1),
             new Word(Opcode.STD, 0, -1, 10),
+            new Word(Opcode.STOP, -1, -1, -1),
 
-            new Word(Opcode.LDI, 0, -1, -5),
-            // new Word(Opcode.STD, 0, -1, 20),
-            new Word(Opcode.LDI, 1, -1, 5),
-            // new Word(Opcode.STD, 1, -1, 21),
+            new Word(Opcode.STD, 0, -1, 20), // calculo do fatorial
+            new Word(Opcode.LDD, 1, -1, 20),
+            new Word(Opcode.SUBI, 1, -1, 1),
 
-            // new Word(Opcode.JMP, -1, -1, 12),
+            new Word(Opcode.DATA, -1, -1, 10), // guarda a posição para o loop do calculo do fatorial
 
-            new Word(Opcode.JMPILM, -1, 0, 10),
+            new Word(Opcode.MULT, 0, 1, -1),
+            new Word(Opcode.SUBI, 1, -1, 1), // loop do calculo do fatorial
+            new Word(Opcode.JMPIGM, -1, 1, 9), // se r2 > 0 volta pro inicio do loop
+
+            new Word(Opcode.STD, 0, -1, 10),
             new Word(Opcode.STOP, -1, -1, -1)
         };
     }

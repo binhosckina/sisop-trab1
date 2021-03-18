@@ -43,6 +43,11 @@
                         pc++;
                         break;
 
+                    case Opcode.LDD: // 17. Rd ← k
+                        reg[ir.r1] = m[ir.p].p;
+                        pc++;
+                        break;
+
                     case Opcode.STD: // 18. [A] ← Rs
                         m[ir.p].opc = Opcode.DATA;
                         m[ir.p].p = reg[ir.r1];
@@ -59,6 +64,11 @@
                         pc++;
                         break;
 
+                    case Opcode.SUBI: // 12. Rd ← Rd - k
+                        reg[ir.r1] = reg[ir.r1] - ir.p;
+                        pc++;
+                        break;
+
                     case Opcode.STX: // 20. [Rd] ←Rs
                         m[reg[ir.r1]].opc = Opcode.DATA;
                         m[reg[ir.r1]].p = reg[ir.r2];
@@ -67,6 +77,11 @@
 
                     case Opcode.SUB: // 14. Rd ← Rd - Rs
                         reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
+                        pc++;
+                        break;
+
+                    case Opcode.MULT: // 15. Rd ← Rd * Rs
+                        reg[ir.r1] = reg[ir.r1] * reg[ir.r2];
                         pc++;
                         break;
 
@@ -95,7 +110,18 @@
                             pc++;
                         break;
 
+                    case Opcode.JMPIEM: // 8. If Rc = 0 Then PC ← [A] Else PC ← PC +1
+                        if (reg[ir.r2] == 0)
+                            pc = m[ir.p].p;
+                        else
+                            pc++;
+                        break;
+
                     case Opcode.STOP: // 10. por enquanto, para execucao
+                        break;
+
+                    default:
+                        pc++;
                         break;
                 }
 
