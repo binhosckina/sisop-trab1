@@ -131,7 +131,7 @@ namespace sisop_trab1
                         break;
 
                     case Opcode.DATA:
-                        pc++ //precisa ser implementado
+                        pc++; //precisa ser implementado
                         break;
 
                     default:
