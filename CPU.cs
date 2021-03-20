@@ -65,17 +65,35 @@ namespace sisop_trab1
                         break;
 
                     case Opcode.ADD: // 13. Rd ← Rd + Rs
-                        reg[ir.r1] = reg[ir.r1] + reg[ir.r2];
+                        try{
+                            reg[ir.r1] = reg[ir.r1] + reg[ir.r2];
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
                         pc++;
                         break;
 
                     case Opcode.ADDI: // 11. Rd ← Rd + k
-                        reg[ir.r1] = reg[ir.r1] + ir.p;
+                        try{
+                            reg[ir.r1] = reg[ir.r1] + ir.p;
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
                         pc++;
                         break;
 
                     case Opcode.SUBI: // 12. Rd ← Rd - k
-                        reg[ir.r1] = reg[ir.r1] - ir.p;
+                        try{
+                            reg[ir.r1] = reg[ir.r1] - ir.p;
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
                         pc++;
                         break;
 
@@ -86,12 +104,24 @@ namespace sisop_trab1
                         break;
 
                     case Opcode.SUB: // 14. Rd ← Rd - Rs
-                        reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
+                        try{
+                            reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
                         pc++;
                         break;
 
                     case Opcode.MULT: // 15. Rd ← Rd * Rs
-                        reg[ir.r1] = reg[ir.r1] * reg[ir.r2];
+                        try{
+                            reg[ir.r1] = reg[ir.r1] * reg[ir.r2];
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
                         pc++;
                         break;
 
