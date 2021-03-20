@@ -1,4 +1,6 @@
-﻿namespace sisop_trab1
+﻿using System;
+
+namespace sisop_trab1
 {
     public class CPU
     {
@@ -6,6 +8,7 @@
         private int pc;             // ... composto de program counter,
         private Word ir;            // instruction register,
         private int[] reg;          // registradores da CPU
+        string msg; // messagem da interrupção
 
         private Word[] m;   // CPU acessa MEMORIA, guarda referencia 'm' a ela. memoria nao muda. ee sempre a mesma.
 
@@ -25,8 +28,15 @@
             while (true)
             {           // ciclo de instrucoes. acaba cfe instrucao, veja cada caso.
                         // FETCH
-                ir = m[pc];     // busca posicao da memoria apontada por pc, guarda em ir
-                                // EXECUTA INSTRUCAO NO ir
+                if (pc > new VM().tamMem)
+                {
+                    msg = "Endereço inválido: programa do usuário acessando endereço fora de limites permitidos"; // messagem da interrupção 
+                    ir.opc = Opcode.STOP;
+                }
+                else
+                {
+                    ir = m[pc];     // busca posicao da memoria apontada por pc, guarda em ir
+                }                   // EXECUTA INSTRUCAO NO ir
                 switch (ir.opc)
                 { // para cada opcode, sua execução
 
@@ -120,7 +130,13 @@
                     case Opcode.STOP: // 10. por enquanto, para execucao
                         break;
 
+                    case Opcode.DATA:
+                        pc++ //precisa ser implementado
+                        break;
+
                     default:
+                        ir.opc = Opcode.STOP; // 
+                        msg = "Instrução inválida: a instrução carregada é inválida"; // messagem da interrupção
                         pc++;
                         break;
                 }
@@ -128,6 +144,7 @@
                 // VERIFICA INTERRUPÇÃO !!! - TERCEIRA FASE DO CICLO DE INSTRUÇÕES
                 if (ir.opc == Opcode.STOP)
                 {
+                    Console.WriteLine(msg);
                     break; // break sai do loop da cpu
                 }
             }
