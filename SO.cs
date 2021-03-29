@@ -46,6 +46,18 @@ namespace sisop_trab1
             vm.cpu.run();
             Utils.dump(vm.m, 0, 15);
         }
+
+        static public void test4(VM vm)
+        {
+            Word[] p = Program.P4;
+            Utils.carga(p, vm.m);
+            vm.cpu.setContext(0);
+            Console.WriteLine("---------------------------------- programa carregado ");
+            Utils.dump(vm.m, 0, 36);
+            Console.WriteLine("---------------------------------- após execucao ");
+            vm.cpu.run();
+            Utils.dump(vm.m, 0, 36);
+        }
     }
 
 }

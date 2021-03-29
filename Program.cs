@@ -56,5 +56,49 @@
             new Word(Opcode.STD, 0, -1, 10),
             new Word(Opcode.STOP, -1, -1, -1)
         };
+
+        /*
+            r0 = tamanho do array
+            r1 = valor 1
+            r2 = valor 2
+            r3 = 
+            r4 = 
+        */
+        public static Word[] P4 = new Word[] {
+            new Word(Opcode.DATA, -1, -1, 7), // 0 loop posição atual do array
+            new Word(Opcode.DATA, -1, -1, 4), // 1 loop posição inicial do array
+            new Word(Opcode.DATA, -1, -1, 20), // 2 guarda a posição inicia do array
+            new Word(Opcode.LDI, 0, -1, 5), // 3 p = quantidade de valores para ordenar
+
+            new Word(Opcode.LDI, 4, -1, 0), // 4
+            new Word(Opcode.ADD, 4, 0, -1), // 5
+
+            new Word(Opcode.LDD, 3, -1, 2), // 6 coloca r3 na posição inicial do array
+
+            new Word(Opcode.SUBI, 4, -1, 1), // 7
+            new Word(Opcode.JMPIEM, -1, 4, 2), // 8 
+
+            new Word(Opcode.LDX, 1, 3, -1), // 9 carrega da memoria para os registradores
+            new Word(Opcode.ADDI, 3, -1, 1), // 10
+            new Word(Opcode.LDX, 2, 3, -1), // 11
+            new Word(Opcode.SUB, 1, 2, -1), // 12
+
+            new Word(Opcode.JMPILM, -1, 1, 0), // 13 se r1 < 0 próximo loop
+            new Word(Opcode.SUBI, 3, -1, 1), // 14 /*
+            new Word(Opcode.LDX, 1, 3, -1), // 15 
+            new Word(Opcode.STX, 3, 2, -1), // 16  Swap na memória
+            new Word(Opcode.ADDI, 3, -1, 1), // 17
+            new Word(Opcode.STX, 3, 1, -1), // 18 */
+
+            new Word(Opcode.JMPIGM, -1, 4, 1), // 19
+
+            new Word(Opcode.DATA, -1, -1, 3), // 20
+            new Word(Opcode.DATA, -1, -1, 1), // 21
+            new Word(Opcode.DATA, -1, -1, 5), // 22 valores para ordenar
+            new Word(Opcode.DATA, -1, -1, 4), // 23
+            new Word(Opcode.DATA, -1, -1, 2), // 24
+
+            new Word(Opcode.STOP, -1, -1, -1)
+        };
     }
 }

@@ -58,6 +58,11 @@ namespace sisop_trab1
                         pc++;
                         break;
 
+                    case Opcode.LDX: // 19. Rd ← [Rs]
+                        reg[ir.r1] = m[reg[ir.r2]].p;
+                        pc++;
+                        break;
+
                     case Opcode.STD: // 18. [A] ← Rs
                         m[ir.p].opc = Opcode.DATA;
                         m[ir.p].p = reg[ir.r1];
@@ -156,6 +161,12 @@ namespace sisop_trab1
                         else
                             pc++;
                         break;
+
+                    // case Opcode.SWAP: // 21. T ← Ra, Ra ← Rb, Rb ← T
+                    //     reg[0] = reg[1];
+                    //     reg[1] = reg[2];
+                    //     reg[2] = reg[0];
+                    //     break;
 
                     case Opcode.STOP: // 10. por enquanto, para execucao
                         break;
