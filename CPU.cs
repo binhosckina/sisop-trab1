@@ -172,7 +172,23 @@ namespace sisop_trab1
                         break;
 
                     case Opcode.DATA:
-                        pc++; //precisa ser implementado
+                        pc++; 
+                        break;
+                    
+                    case Opcode.TRAP:
+                        int valor;
+                        if (reg[7] == 1){
+                            if (Int32.TryParse(Console.ReadLine(), out valor)){
+                                reg[8] = valor;
+                            }else{
+                                ir.opc = Opcode.STOP; // 
+                                msg = "Tipo de entrada invalido"; // messagem da interrupção
+                            }
+                        }
+                        if (reg[7] == 2){
+                            Console.WriteLine(reg[8]);
+                        }
+                        pc++;
                         break;
 
                     default:
