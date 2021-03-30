@@ -14,9 +14,9 @@ namespace sisop_trab1
         static void Main(string[] args)
         {
             SO s = new SO();
-            // SO.test1(s.vm);
-            // SO.test2(s.vm);
-            // SO.test3(s.vm);
+            SO.test1(s.vm);
+            SO.test2(s.vm);
+            SO.test3(s.vm);
             SO.test4(s.vm);
         }
     }
