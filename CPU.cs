@@ -8,8 +8,9 @@ namespace sisop_trab1
         private int pc;             // ... composto de program counter,
         private Word ir;            // instruction register,
         private int[] reg;          // registradores da CPU
+        private bool interruption = false;
         string msg; // messagem da interrupção
-
+        public GM gm;
         private Word[] m;   // CPU acessa MEMORIA, guarda referencia 'm' a ela. memoria nao muda. ee sempre a mesma.
 
         public CPU(Word[] _m)
@@ -74,7 +75,7 @@ namespace sisop_trab1
                             reg[ir.r1] = reg[ir.r1] + reg[ir.r2];
                         }
                         catch (OverflowException e){
-                            ir.opc = Opcode.STOP; // 
+                            interruption = true; // 
                             msg = "Overflow"; // messagem da interrupção
                         }
                         pc++;
@@ -85,7 +86,7 @@ namespace sisop_trab1
                             reg[ir.r1] = reg[ir.r1] + ir.p;
                         }
                         catch (OverflowException e){
-                            ir.opc = Opcode.STOP; // 
+                            interruption = true; // 
                             msg = "Overflow"; // messagem da interrupção
                         }
                         pc++;
@@ -96,7 +97,7 @@ namespace sisop_trab1
                             reg[ir.r1] = reg[ir.r1] - ir.p;
                         }
                         catch (OverflowException e){
-                            ir.opc = Opcode.STOP; // 
+                            interruption = true; // 
                             msg = "Overflow"; // messagem da interrupção
                         }
                         pc++;
@@ -113,7 +114,7 @@ namespace sisop_trab1
                             reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
                         }
                         catch (OverflowException e){
-                            ir.opc = Opcode.STOP; // 
+                            interruption = true; // 
                             msg = "Overflow"; // messagem da interrupção
                         }
                         pc++;
@@ -124,7 +125,7 @@ namespace sisop_trab1
                             reg[ir.r1] = reg[ir.r1] * reg[ir.r2];
                         }
                         catch (OverflowException e){
-                            ir.opc = Opcode.STOP; // 
+                            interruption = true; // 
                             msg = "Overflow"; // messagem da interrupção
                         }
                         pc++;
@@ -176,6 +177,7 @@ namespace sisop_trab1
                         break;
                     
                     case Opcode.TRAP:
+
                         int valor;
                         if (reg[7] == 1){
                             if (Int32.TryParse(Console.ReadLine(), out valor)){
@@ -199,7 +201,7 @@ namespace sisop_trab1
                 }
 
                 // VERIFICA INTERRUPÇÃO !!! - TERCEIRA FASE DO CICLO DE INSTRUÇÕES
-                if (ir.opc == Opcode.STOP)
+                if (interruption)
                 {
                     Console.WriteLine(msg);
                     break; // break sai do loop da cpu
