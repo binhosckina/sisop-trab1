@@ -10,8 +10,9 @@ namespace sisop_trab1
         private int[] reg;          // registradores da CPU
         private bool interruption = false;
         string msg; // messagem da interrupção
-        public GM gm;
+        private GM gm;
         private Word[] m;   // CPU acessa MEMORIA, guarda referencia 'm' a ela. memoria nao muda. ee sempre a mesma.
+
 
         public CPU(Word[] _m)
         {     // ref a MEMORIA e interrupt handler passada na criacao da CPU
