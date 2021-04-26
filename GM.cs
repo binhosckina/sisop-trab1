@@ -66,8 +66,9 @@ namespace sisop_trab1
         }
 
 
-        public void desaloca(int[] pages)
+        public void desaloca(Processo p)
         {
+            int[] pages = p.getAllocatedPages();
             for (int i = 0; i < pages.Length; i++)
             {
                 frameLivre[pages[i]] = true;

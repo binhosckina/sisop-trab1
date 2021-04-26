@@ -1,4 +1,6 @@
-﻿namespace sisop_trab1
+﻿using System;
+
+namespace sisop_trab1
 {
     
     public class VM
@@ -10,6 +12,7 @@
         {   // vm deve ser configurada com endereço de tratamento de interrupcoes
             // memória
             tamMem = 1024; 
+            m = new Word[tamMem];
             for (int i = 0; i < tamMem; i++) { m[i] = new Word(Opcode.___, -1, -1, -1); };
             // cpu
             cpu = new CPU(m);
