@@ -6,9 +6,11 @@ namespace sisop_trab1
     {
         private int id;
         private int[] paginasAlocadas;
+        private VariaveisPrograma contexto;
         public Processo(int id, int[] paginasAlocadas){
             this.id= id;
             this.paginasAlocadas = paginasAlocadas;
+            this.contexto = new VariaveisPrograma(0,1024,paginasAlocadas,new int[8], 0, new Word(Opcode.___,-1,-1,-1));
         }
 
         public int[] getAllocatedPages(){
@@ -17,6 +19,15 @@ namespace sisop_trab1
 
         public int getId(){
             return id;
+        }
+
+        public void setVariaveisPrograma(VariaveisPrograma contexto)
+        {
+            this.contexto = contexto;
+        }
+
+        public VariaveisPrograma GetVariaveisPrograma(){
+            return this.contexto;
         }
     }
 }

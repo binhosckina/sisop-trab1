@@ -42,7 +42,7 @@ namespace sisop_trab1
                 if (frameLivre[i])
                 {
                     frameLivre[i] = false;
-                    //Aqui implementamos o for para alocar o programa de acordo com a sua tabela de páginas (allocatedPages)
+                    //Aqui implementamos o for para alocar o programa de acordo com a sua tabela de páginas (PaginasAlocadas)
                     //Esse for abaixo está errado
                     for (int j = tamPag * i; j < tamPag * (i + 1); j++)
                     {
@@ -59,9 +59,6 @@ namespace sisop_trab1
                     pages--;
                 }
             }
-            //        for(int i =0; i<allocatedFrames.length; i++){
-            //            System.out.println(allocatedFrames[i]);
-            //        }
             return framesAlocados;
         }
 

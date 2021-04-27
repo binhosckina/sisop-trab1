@@ -10,14 +10,11 @@ namespace sisop_trab1
         private int[] reg;          // registradores da CPU
         private bool interruption = false;
         string msg; // messagem da interrupção
-        private GM gm;
         private Word[] m;   // CPU acessa MEMORIA, guarda referencia 'm' a ela. memoria nao muda. ee sempre a mesma.
         private int min;
         private int max;
 	    //private Word[] memory;
 	    private int[] paginasAlocadas;
-	    private int processId;
-
         
         public CPU(Word[] _m)
         {     // ref a MEMORIA e interrupt handler passada na criacao da CPU
@@ -74,178 +71,173 @@ namespace sisop_trab1
             while (true)
             {           // ciclo de instrucoes. acaba cfe instrucao, veja cada caso.
                         // FETCH
-                if (isLegal(enderecoToMemoria(pc))) {               // EXECUTA INSTRUCAO NO ir
-                    
-                    switch (ir.opc)
-                    { // para cada opcode, sua execução
+                if (pc > new VM().tamMem)
+                {
+                    msg = "Endereço inválido: programa do usuário acessando endereço fora de limites permitidos"; // messagem da interrupção 
+                    ir.opc = Opcode.STOP;
+                }
+                else
+                {
+                    ir = m[pc];     // busca posicao da memoria apontada por pc, guarda em ir
+                }                   // EXECUTA INSTRUCAO NO ir
+                switch (ir.opc)
+                { // para cada opcode, sua execução
+                   case Opcode.JMP: // 1. PC ← k
+                        pc = ir.p;
+                        break;
 
-                        case Opcode.JMP: // 1. PC ← k
-                            pc = ir.p;
-                            break;
+                    case Opcode.JMPI: // 2. PC ← k
+                        pc = ir.r1;
+                        break;
 
-                        case Opcode.JMPI: // 2. PC ← k
-                            pc = ir.r1;
-                            break;
+                    case Opcode.LDI: // 16. Rd ← k
+                        reg[ir.r1] = ir.p;
+                        pc++;
+                        break;
 
-                        case Opcode.LDI: // 16. Rd ← k
-                            reg[ir.r1] = ir.p;
-                            pc++;
-                            break;
+                    case Opcode.LDD: // 17. Rd ← k
+                        reg[ir.r1] = m[ir.p].p;
+                        pc++;
+                        break;
 
-                        case Opcode.LDD: // 17. Rd ← k
-                            if (isLegal(enderecoToMemoria(ir.p))) {
-                                reg[ir.r1] = m[ir.p].p;
-                                pc++;
-                                break;
-                            }
-                            break;
-                        case Opcode.LDX: // 19. Rd ← [Rs]
-                            if (isLegal(enderecoToMemoria(reg[ir.r2]))) {
-                            reg[ir.r1] = m[reg[ir.r2]].p;
-                            }
-                            pc++;
-                            break;
+                    case Opcode.LDX: // 19. Rd ← [Rs]
+                        reg[ir.r1] = m[reg[ir.r2]].p;
+                        pc++;
+                        break;
 
-                        case Opcode.STD: // 18. [A] ← Rs
-                            if (isLegal(enderecoToMemoria(ir.p))) {
-                                m[ir.p].opc = Opcode.DATA;
-                                m[ir.p].p = reg[ir.r1];
-                                pc++;
-                            }
-                            break;
-                        case Opcode.ADD: // 13. Rd ← Rd + Rs
-                            try{
-                                reg[ir.r1] = reg[ir.r1] + reg[ir.r2];
-                            }
-                            catch (OverflowException e){
-                                interruption = true; // 
-                                msg = "Overflow"; // messagem da interrupção
-                            }
-                            pc++;
-                            break;
+                    case Opcode.STD: // 18. [A] ← Rs
+                        m[ir.p].opc = Opcode.DATA;
+                        m[ir.p].p = reg[ir.r1];
+                        pc++;
+                        break;
 
-                        case Opcode.ADDI: // 11. Rd ← Rd + k
-                            try{
-                                reg[ir.r1] = reg[ir.r1] + ir.p;
-                            }
-                            catch (OverflowException e){
-                                interruption = true; // 
-                                msg = "Overflow"; // messagem da interrupção
-                            }
-                            pc++;
-                            break;
-
-                        case Opcode.SUBI: // 12. Rd ← Rd - k
-                            try{
-                                reg[ir.r1] = reg[ir.r1] - ir.p;
-                            }
-                            catch (OverflowException e){
-                                interruption = true; // 
-                                msg = "Overflow"; // messagem da interrupção
-                            }
-                            pc++;
-                            break;
-
-                        case Opcode.STX: // 20. [Rd] ←Rs
-                            if (isLegal(enderecoToMemoria(reg[ir.r1]))) {
-                                m[reg[ir.r1]].opc = Opcode.DATA;
-                                m[reg[ir.r1]].p = reg[ir.r2];
-                            }
-                            pc++;
-                            break;
-
-                        case Opcode.SUB: // 14. Rd ← Rd - Rs
-                            try{
-                                reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
-                            }
-                            catch (OverflowException e){
-                                interruption = true; // 
-                                msg = "Overflow"; // messagem da interrupção
-                            }
-                            pc++;
-                            break;
-
-                        case Opcode.MULT: // 15. Rd ← Rd * Rs
-                            try{
-                                reg[ir.r1] = reg[ir.r1] * reg[ir.r2];
-                            }
-                            catch (OverflowException e){
-                                interruption = true; // 
-                                msg = "Overflow"; // messagem da interrupção
-                            }
-                            pc++;
-                            break;
-
-                        case Opcode.JMPIG: // 3. If Rc > 0 Then PC ← Rs Else PC ← PC +1
-                            if (reg[ir.r2] > 0)
-                                pc = reg[ir.r1];
-                            else
-                                pc++;
-                            break;
-
-                        case Opcode.JMPIM: // 6. PC ← [A]
-                            if (isLegal(ir.p)) {
-                                pc = m[ir.p].p;
-                            }
-                            break;
-
-                        case Opcode.JMPIGM: // 7. If Rc > 0 Then PC ← [A] Else PC ← PC +1
-                            if (reg[ir.r2] > 0  && isLegal(enderecoToMemoria(ir.p)))
-                                pc = m[ir.p].p;
-                            else
-                                pc++;
-                            break;
-
-                        case Opcode.JMPILM: // 8. If Rc < 0 Then PC ← [A] Else PC ← PC +1
-                            if (reg[ir.r2] < 0 && isLegal(enderecoToMemoria(ir.p)))
-                                pc = m[ir.p].p;
-                            else
-                                pc++;
-                            break;
-
-                        case Opcode.JMPIEM: // 8. If Rc = 0 Then PC ← [A] Else PC ← PC +1
-                            if (reg[ir.r2] == 0 && isLegal(enderecoToMemoria(ir.p)))
-                                pc = m[ir.p].p;
-                            else
-                                pc++;
-                            break;
-
-                        // case Opcode.SWAP: // 21. T ← Ra, Ra ← Rb, Rb ← T
-                        //     reg[0] = reg[1];
-                        //     reg[1] = reg[2];
-                        //     reg[2] = reg[0];
-                        //     break;
-
-                        case Opcode.STOP: // 10. por enquanto, para execucao
-                            break;
-
-                        case Opcode.DATA:
-                            pc++; 
-                            break;
-
-                        case Opcode.TRAP:
-
-                            int valor;
-                            if (reg[7] == 1){
-                                if (Int32.TryParse(Console.ReadLine(), out valor)){
-                                    reg[8] = valor;
-                                }else{
-                                    ir.opc = Opcode.STOP; // 
-                                    msg = "Tipo de entrada invalido"; // messagem da interrupção
-                                }
-                            }
-                            if (reg[7] == 2){
-                                Console.WriteLine(reg[8]);
-                            }
-                            pc++;
-                            break;
-
-                        default:
+                    case Opcode.ADD: // 13. Rd ← Rd + Rs
+                        try{
+                            reg[ir.r1] = reg[ir.r1] + reg[ir.r2];
+                        }
+                        catch (OverflowException e){
                             ir.opc = Opcode.STOP; // 
-                            msg = "Instrução inválida: a instrução carregada é inválida"; // messagem da interrupção
+                            msg = "Overflow"; // messagem da interrupção
+                        }
+                        pc++;
+                        break;
+
+                    case Opcode.ADDI: // 11. Rd ← Rd + k
+                        try{
+                            reg[ir.r1] = reg[ir.r1] + ir.p;
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
+                        pc++;
+                        break;
+
+                    case Opcode.SUBI: // 12. Rd ← Rd - k
+                        try{
+                            reg[ir.r1] = reg[ir.r1] - ir.p;
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
+                        pc++;
+                        break;
+
+                    case Opcode.STX: // 20. [Rd] ←Rs
+                        m[reg[ir.r1]].opc = Opcode.DATA;
+                        m[reg[ir.r1]].p = reg[ir.r2];
+                        pc++;
+                        break;
+
+                    case Opcode.SUB: // 14. Rd ← Rd - Rs
+                        try{
+                            reg[ir.r1] = reg[ir.r1] - reg[ir.r2];
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
+                        pc++;
+                        break;
+
+                    case Opcode.MULT: // 15. Rd ← Rd * Rs
+                        try{
+                            reg[ir.r1] = reg[ir.r1] * reg[ir.r2];
+                        }
+                        catch (OverflowException e){
+                            ir.opc = Opcode.STOP; // 
+                            msg = "Overflow"; // messagem da interrupção
+                        }
+                        pc++;
+                        break;
+
+                    case Opcode.JMPIG: // 3. If Rc > 0 Then PC ← Rs Else PC ← PC +1
+                        if (reg[ir.r2] > 0)
+                            pc = reg[ir.r1];
+                        else
                             pc++;
-                            break;
-                    }
+                        break;
+
+                    case Opcode.JMPIM: // 6. PC ← [A]
+                        pc = m[ir.p].p;
+                        break;
+
+                    case Opcode.JMPIGM: // 7. If Rc > 0 Then PC ← [A] Else PC ← PC +1
+                        if (reg[ir.r2] > 0)
+                            pc = m[ir.p].p;
+                        else
+                            pc++;
+                        break;
+
+                    case Opcode.JMPILM: // 8. If Rc < 0 Then PC ← [A] Else PC ← PC +1
+                        if (reg[ir.r2] < 0)
+                            pc = m[ir.p].p;
+                        else
+                            pc++;
+                        break;
+
+                    case Opcode.JMPIEM: // 8. If Rc = 0 Then PC ← [A] Else PC ← PC +1
+                        if (reg[ir.r2] == 0)
+                            pc = m[ir.p].p;
+                        else
+                            pc++;
+                        break;
+
+                    // case Opcode.SWAP: // 21. T ← Ra, Ra ← Rb, Rb ← T
+                    //     reg[0] = reg[1];
+                    //     reg[1] = reg[2];
+                    //     reg[2] = reg[0];
+                    //     break;
+
+                    case Opcode.STOP: // 10. por enquanto, para execucao
+                        break;
+
+                    case Opcode.DATA:
+                        pc++; 
+                        break;
+                    
+                    case Opcode.TRAP:
+                        int valor;
+                        if (reg[7] == 1){
+                            if (Int32.TryParse(Console.ReadLine(), out valor)){
+                                reg[8] = valor;
+                            }else{
+                                ir.opc = Opcode.STOP; // 
+                                msg = "Tipo de entrada invalido"; // messagem da interrupção
+                            }
+                        }
+                        if (reg[7] == 2){
+                            Console.WriteLine(reg[8]);
+                        }
+                        pc++;
+                        break;
+
+                    default:
+                        ir.opc = Opcode.STOP; // 
+                        msg = "Instrução inválida: a instrução carregada é inválida"; // messagem da interrupção
+                        pc++;
+                        break;
                 }
                 // VERIFICA INTERRUPÇÃO !!! - TERCEIRA FASE DO CICLO DE INSTRUÇÕES
                 if (interruption)
@@ -257,3 +249,4 @@ namespace sisop_trab1
         }
     }
 }
+

@@ -6,7 +6,7 @@ namespace sisop_trab1
     public class SO
     {
         public VM vm;
-        private LinkedList<Processo> processos;
+        private static LinkedList<Processo> processos;
         private static GM gm;
         private static GP gp;
         public SO()
@@ -17,27 +17,71 @@ namespace sisop_trab1
             gp = new GP(gm, vm, processos = new LinkedList<Processo>());
         }
 
-        static public void test1(VM vm)
+        static public void runFibonacci(VM vm)
         {
             Word[] p = Program.fibonacci10;
-            int[] allocatedPages = gm.aloca(p);
             Processo proc = gp.criaProcesso(p);
-            // VariaveisPrograma = new VariaveisPrograma();
+            int[] allocatedPages = gm.aloca(p);
             Utils.carga(p, vm.m);
+            processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, 0, 33);
             Console.WriteLine("---------------------------------- após execucao ");
-            //vm.cpu.setContext( ); 
+            vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             vm.cpu.run();
             gp.finalizaProcesso(proc);
             Utils.dump(vm.m, 0, 33);
 
         }
 
+        static public void runProgMinimo(VM vm)
+        {
+            Word[] p = Program.progMinimo;
+            Processo proc = gp.criaProcesso(p);
+            int[] allocatedPages = gm.aloca(p);
+            Utils.carga(p, vm.m);
+            proc.setVariaveisPrograma(vm.cpu.getContext());
+            processos.AddLast(proc);
+            Console.WriteLine("---------------------------------- programa carregado ");
+            Utils.dump(vm.m, 0, 15);
+            Console.WriteLine("---------------------------------- após execucao ");
+            vm.cpu.run();
+            Utils.dump(vm.m, 0, 15);
+        }
+
+        static public void runP3(VM vm)
+        {
+            Word[] p = Program.P3;
+            Processo proc = gp.criaProcesso(p);
+            int[] allocatedPages = gm.aloca(p);
+            Utils.carga(p, vm.m);
+            proc.setVariaveisPrograma(vm.cpu.getContext());
+            processos.AddLast(proc);
+            Console.WriteLine("---------------------------------- programa carregado ");
+            Utils.dump(vm.m, 0, 15);
+            Console.WriteLine("---------------------------------- após execucao ");
+            vm.cpu.run();
+            Utils.dump(vm.m, 0, 15);
+        }
+
+        static public void runP4(VM vm)
+        {
+            Word[] p = Program.P4;
+            Processo proc = gp.criaProcesso(p);
+            int[] allocatedPages = gm.aloca(p);
+            Utils.carga(p, vm.m);
+            proc.setVariaveisPrograma(vm.cpu.getContext());
+            processos.AddLast(proc);
+            Console.WriteLine("---------------------------------- programa carregado ");
+            Utils.dump(vm.m, 0, 36);
+            Console.WriteLine("---------------------------------- após execucao ");
+            vm.cpu.run();
+            Utils.dump(vm.m, 0, 36);
+        }
+
         static public void test2(VM vm)
         {
             Word[] p = Program.progMinimo;
-            int[] allocatedPages = gm.aloca(p);
             Utils.carga(p, vm.m);
             //vm.cpu.setContext(0);
             Console.WriteLine("---------------------------------- programa carregado ");
@@ -45,32 +89,6 @@ namespace sisop_trab1
             Console.WriteLine("---------------------------------- após execucao ");
             vm.cpu.run();
             Utils.dump(vm.m, 0, 15);
-        }
-
-        static public void test3(VM vm)
-        {
-            Word[] p = Program.P3;
-            int[] allocatedPages = gm.aloca(p);
-            Utils.carga(p, vm.m);
-            //vm.cpu.setContext(0);
-            Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 15);
-            Console.WriteLine("---------------------------------- após execucao ");
-            vm.cpu.run();
-            Utils.dump(vm.m, 0, 15);
-        }
-
-        static public void test4(VM vm)
-        {
-            Word[] p = Program.P4;
-            int[] allocatedPages = gm.aloca(p);
-            Utils.carga(p, vm.m);
-            //vm.cpu.setContext(0);
-            Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 36);
-            Console.WriteLine("---------------------------------- após execucao ");
-            vm.cpu.run();
-            Utils.dump(vm.m, 0, 36);
         }
     }
 
