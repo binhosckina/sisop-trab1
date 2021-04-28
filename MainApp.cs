@@ -15,9 +15,9 @@ namespace sisop_trab1
         {
             SO s = new SO();
             SO.runFibonacci(s.vm);
-            //SO.test2(s.vm);
-            //SO.test3(s.vm);
-            //SO.test4(s.vm);
+            SO.runP3(s.vm);
+            SO.runProgMinimo(s.vm);
+            SO.runP4(s.vm);
         }
     }
 }

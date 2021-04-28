@@ -14,6 +14,10 @@ namespace sisop_trab1
             this.vm = vm;
             this.proc = proc;
         }
+
+        public LinkedList<Processo> getProcList(){
+            return proc;
+        }
         public Processo criaProcesso(Word[] p){
             int[] paginasAlocadas = gm.aloca(p);
             Processo processo = new Processo(process_id, paginasAlocadas);

@@ -30,7 +30,7 @@ namespace sisop_trab1
 
         public int[] aloca(Word[] m)
         {
-            int pages = m[m.Length - 1].r1 / tamPag;
+            int pages = m.Length / tamPag;
             if (m.Length % tamPag > 0) pages++;
             int[] framesAlocados = new int[pages];
             int alocados = 0;
@@ -59,6 +59,7 @@ namespace sisop_trab1
                     pages--;
                 }
             }
+            Console.WriteLine("Frames alocados: "+framesAlocados.Length);
             return framesAlocados;
         }
 

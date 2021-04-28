@@ -10,7 +10,11 @@ namespace sisop_trab1
     	private Processo processoAtual;
     	private CPU cpu;
 
-    	public Escalonador() { }
+    	public Escalonador(LinkedList<Processo> processos, CPU cpu) { 
+            this.processos = processos;
+    		this.pointer = 0;
+    		this.cpu = cpu;
+        }
 
     	public void run() {
     		while(true){
@@ -28,18 +32,13 @@ namespace sisop_trab1
     				        pointer = (pointer + 1) % processos.Count;
     				        processos.Remove(processo);
     				        cpu.setContext(processo.GetVariaveisPrograma());
+							cpu.run();
                         }
                     }
     			} catch (Exception e) {
     				Console.WriteLine(e);
     			}
     		}
-    	}
-
-    	public void setAttributes(LinkedList<Processo> processos, CPU cpu){
-    		this.processos = processos;
-    		this.pointer = 0;
-    		this.cpu = cpu;
     	}
 
     	public Processo getPA() {
