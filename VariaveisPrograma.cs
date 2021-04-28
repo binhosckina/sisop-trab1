@@ -19,11 +19,11 @@ namespace sisop_trab1
             this.p = p;
         }
     
-        public int getmin() {
+        public int getMin() {
             return min;
         }
     
-        public int getmax() {
+        public int getMax() {
             return max;
         }
     

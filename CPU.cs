@@ -28,8 +28,8 @@ namespace sisop_trab1
 
         public void setContext(VariaveisPrograma vp)
         {  // no futuro esta funcao vai ter que ser 
-            this.min = vp.getmin();
-		    this.max = vp.getmax();
+            this.min = vp.getMin();
+		    this.max = vp.getMax();
 		    this.paginasAlocadas = vp.getPaginasAlocadas();
 		    this.pc = vp.getpc();
 		    this.reg = vp.getregistradores();
