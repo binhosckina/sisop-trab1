@@ -10,7 +10,7 @@ namespace sisop_trab1
         public Processo(int id, int[] paginasAlocadas){
             this.id= id;
             this.paginasAlocadas = paginasAlocadas;
-            this.contexto = new VariaveisPrograma(0,paginasAlocadas.Length*16,paginasAlocadas,new int[8], 0, new Word(Opcode.___,-1,-1,-1));
+            this.contexto = new VariaveisPrograma(paginasAlocadas[0],paginasAlocadas[paginasAlocadas.Length-1]+16,paginasAlocadas,new int[8], 0, new Word(Opcode.___,-1,-1,-1));
         }
 
         public int[] getAllocatedPages(){

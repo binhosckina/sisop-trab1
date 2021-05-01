@@ -21,18 +21,18 @@ namespace sisop_trab1
 
         static public void runFibonacci(VM vm)
         {
+            
             Word[] p = Program.fibonacci10;
             Processo proc = gp.criaProcesso(p);
             Utils.carga(p, vm.m);
             processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 33);
-            //Console.WriteLine("---------------------------------- após execucao ");
+            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             //vm.cpu.run();
             //gp.finalizaProcesso(proc);
-            //Utils.dump(vm.m, 0, 33);
-
+            //Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
         }
 
         static public void runProgMinimo(VM vm)
@@ -40,13 +40,15 @@ namespace sisop_trab1
             Word[] p = Program.progMinimo;
             Processo proc = gp.criaProcesso(p);
             Utils.carga(p, vm.m);
-            proc.setVariaveisPrograma(vm.cpu.getContext());
             processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 15);
-            //Console.WriteLine("---------------------------------- após execucao ");
-            //vm.cpu.run();
-           // Utils.dump(vm.m, 0, 15);
+            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Console.WriteLine("---------------------------------- após execucao ");
+            Console.WriteLine(gm.getMemoriaLivre());
+            vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
+            vm.cpu.run();
+            //gp.finalizaProcesso(proc);
+            //Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
         }
 
         static public void runP3(VM vm)
@@ -57,7 +59,7 @@ namespace sisop_trab1
             proc.setVariaveisPrograma(vm.cpu.getContext());
             processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 15);
+            Utils.dump(vm.m, 49, 64);
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
             //Utils.dump(vm.m, 0, 15);
@@ -71,7 +73,7 @@ namespace sisop_trab1
             proc.setVariaveisPrograma(vm.cpu.getContext());
             processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 36);
+            Utils.dump(vm.m, 65, 100);
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
             //Utils.dump(vm.m, 0, 36);
@@ -85,7 +87,7 @@ namespace sisop_trab1
             proc.setVariaveisPrograma(vm.cpu.getContext());
             processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 0, 15);
+            Utils.dump(vm.m, 101, 116);
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
             //Utils.dump(vm.m, 0, 15);

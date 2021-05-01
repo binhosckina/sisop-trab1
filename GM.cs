@@ -1,65 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace sisop_trab1
 { 
     public class GM
 	{
 		private Word[] m;
+
+        public int memoriaLivre;
 		private int tamPag;
 		private int frames;
-		private bool[] frameLivre;
+		private List<bool> frameLivre;
 
 		public GM(Word[] m)
 		{
 			this.m = m;
 			tamPag = 16;
 			frames = m.Length / tamPag;
-			frameLivre = criaFrames();
+            memoriaLivre = m.Length;
+			criaFrames();
 		}
 
-
-		private bool[] criaFrames()
+        public int getMemoriaLivre(){
+            return memoriaLivre;
+        }
+		private void criaFrames()
 		{
+            frameLivre = new List<bool>();
 			bool[] free = new bool[frames];
 			for (int i = 0; i < frames; i++)
 			{
-				free[i] = true;
+				frameLivre.Add(true);
 			}
-			return free;
 		}
 
         public int[] aloca(Word[] m)
         {
+            
             int pages = m.Length / tamPag;
             if (m.Length % tamPag > 0) pages++;
             int[] framesAlocados = new int[pages];
-            int alocados = 0;
-            int programa = 0;   //indice do programa
-
-            for (int i = 0; i < frames; i++)
-            {
-                if (pages == 0) break;
-                if (frameLivre[i])
+            
+            if(pages*tamPag > memoriaLivre || pages == 0){
+                throw new Exception("Memoria cheia");
+            }else{
+                for (int i = 0; i < pages; i++)
                 {
-                    frameLivre[i] = false;
-                    //Aqui implementamos o for para alocar o programa de acordo com a sua tabela de páginas (PaginasAlocadas)
-                    //Esse for abaixo está errado
-                    for (int j = tamPag * i; j < tamPag * (i + 1); j++)
-                    {
-                        if (programa >= m.Length)
-                            break;
-                        this.m[j].opc = m[programa].opc;
-                        this.m[j].r1 = m[programa].r1;
-                        this.m[j].r2 = m[programa].r2;
-                        this.m[j].p = m[programa].p;
-                        programa++;
-                    }
-                    framesAlocados[alocados] = i;
-                    alocados++;
-                    pages--;
+                  memoriaLivre = memoriaLivre - tamPag;
+                  framesAlocados[i] = this.m.Length - memoriaLivre - tamPag;
                 }
             }
-            Console.WriteLine("Frames alocados: "+framesAlocados.Length);
+            Console.WriteLine("Frames alocados: "+framesAlocados.Length+1);
             return framesAlocados;
         }
 

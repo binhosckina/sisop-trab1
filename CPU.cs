@@ -42,29 +42,6 @@ namespace sisop_trab1
                 msg = "Endereço invalido";
 		    	return false;
 		    }
-		    //Check if the adress is in a legal page
-            int page;
-		    if(e <= 16){
-                page = 0;
-            }else{
-                page = e/16;
-            }
-		    bool isLegal = false;
-		    for(int i =0; i< paginasAlocadas.Length; i++){
-		    	if (page == paginasAlocadas[i]) {
-		    		isLegal = true;
-		    		break;
-		    	}
-		    }
-		    if(!isLegal){
-		    	interruption = true;
-                msg = "Endereço invalido";
-		    	Console.WriteLine("Páginas alocadas: \n");
-		    	for(int i =0; i< paginasAlocadas.Length; i++){
-		    		Console.WriteLine(paginasAlocadas[i]);
-		    	}
-		    	return false;
-		    }
 		    return true;
 	    }
 
@@ -252,6 +229,9 @@ namespace sisop_trab1
                     Console.WriteLine(msg);
                     break; // break sai do loop da cpu
                 }
+            }
+            if(pc == 1000){
+               
             }
         }
     }
