@@ -48,7 +48,7 @@ namespace sisop_trab1
             vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             vm.cpu.run();
             //gp.finalizaProcesso(proc);
-            //Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
         }
 
         static public void runP3(VM vm)

@@ -194,6 +194,8 @@ namespace sisop_trab1
                         //     break;
 
                         case Opcode.STOP: // 10. por enquanto, para execucao
+                            msg = "Fim de execução";
+                            interruption = true;
                             break;
 
                         case Opcode.DATA:
@@ -230,9 +232,7 @@ namespace sisop_trab1
                     break; // break sai do loop da cpu
                 }
             }
-            if(pc == 1000){
-               
-            }
+            
         }
     }
 }
