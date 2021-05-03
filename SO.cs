@@ -44,10 +44,10 @@ namespace sisop_trab1
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
             Console.WriteLine("---------------------------------- após execucao ");
-            Console.WriteLine(gm.getMemoriaLivre());
+            Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             vm.cpu.run();
-            //gp.finalizaProcesso(proc);
+            gp.finalizaProcesso(proc);
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
         }
 
