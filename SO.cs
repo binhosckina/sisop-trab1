@@ -16,19 +16,23 @@ namespace sisop_trab1
             vm = new VM();
             gm = new GM(vm.m);
             gp = new GP(gm, vm, processos);
-            es = new Escalonador(gp.getProcList(), vm.cpu);
+            es = new Escalonador(gp, vm.cpu);
         }
 
+        static public void EscalonadorRun(){
+            es.run();
+        }
         static public void runFibonacci(VM vm)
         {
             
-            Word[] p = Program.fibonacci10;
+            Program program = new Program();
+            Word[] p = program.fibonacci10;
             Processo proc = gp.criaProcesso(p);
             Utils.carga(p, vm.m);
             processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
-            Console.WriteLine("---------------------------------- após execucao ");
+            //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             //vm.cpu.run();
             //gp.finalizaProcesso(proc);
@@ -37,23 +41,24 @@ namespace sisop_trab1
 
         static public void runProgMinimo(VM vm)
         {
-            Word[] p = Program.progMinimo;
+            Program program = new Program();
+            Word[] p = program.progMinimo;
             Processo proc = gp.criaProcesso(p);
-            Utils.carga(p, vm.m);
-            processos.AddLast(proc);
+            //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
-            Console.WriteLine("---------------------------------- após execucao ");
             Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
-            vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
-            vm.cpu.run();
-            gp.finalizaProcesso(proc);
-            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            //Console.WriteLine("---------------------------------- após execucao ");
+            //vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
+            //vm.cpu.run();
+            //gp.finalizaProcesso(proc);
+            //Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
         }
 
         static public void runP3(VM vm)
         {
-            Word[] p = Program.P3;
+            Program program = new Program();
+            Word[] p = program.P3;
             Processo proc = gp.criaProcesso(p);
             Utils.carga(p, vm.m);
             proc.setVariaveisPrograma(vm.cpu.getContext());
@@ -67,7 +72,8 @@ namespace sisop_trab1
 
         static public void runP4(VM vm)
         {
-            Word[] p = Program.P4;
+            Program program = new Program();
+            Word[] p = program.P4;
             Processo proc = gp.criaProcesso(p);
             Utils.carga(p, vm.m);
             proc.setVariaveisPrograma(vm.cpu.getContext());
@@ -79,19 +85,6 @@ namespace sisop_trab1
             //Utils.dump(vm.m, 0, 36);
         }
 
-        static public void runP(VM vm)
-        {
-            Word[] p = Program.progMinimo;
-            Processo proc = gp.criaProcesso(p);
-            Utils.carga(p, vm.m);
-            proc.setVariaveisPrograma(vm.cpu.getContext());
-            processos.AddLast(proc);
-            Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, 101, 116);
-            //Console.WriteLine("---------------------------------- após execucao ");
-            //vm.cpu.run();
-            //Utils.dump(vm.m, 0, 15);
-        }
     }
-
+    
 }

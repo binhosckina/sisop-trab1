@@ -6,14 +6,17 @@ namespace sisop_trab1
     public class Escalonador {
 
     	private LinkedList<Processo> processos;
-    	private int pointer;
     	private Processo processoAtual;
     	private CPU cpu;
 
-    	public Escalonador(LinkedList<Processo> processos, CPU cpu) { 
-            this.processos = processos;
-    		this.pointer = 0;
+		private List<Processo> processosMortos;
+		private GP gp;
+
+    	public Escalonador(GP gp, CPU cpu) { 
+			this.gp = gp;
+            this.processos = gp.getProcList();
     		this.cpu = cpu;
+			processosMortos = new List<Processo>();
         }
 
     	public void run() {
@@ -22,19 +25,25 @@ namespace sisop_trab1
     				if(processos.Count == 0){
     					continue;
     				}
-    				Processo proc;
                     foreach (Processo processo in processos)
                     {
-                        if(processo.getId() == pointer){
-                            proc = processo;
-                            this.processoAtual = proc;
-    				        int old = pointer;
-    				        pointer = (pointer + 1) % processos.Count;
-    				        processos.Remove(processo);
-    				        cpu.setContext(processo.GetVariaveisPrograma());
-							cpu.run();
-                        }
+                        this.processoAtual = processo;
+    				    cpu.setContext(processoAtual.GetVariaveisPrograma());
+						cpu.run();
+						if(cpu.getMSG() == "proximo processo" ){
+							processoAtual.setVariaveisPrograma(cpu.getContext());
+							break;
+						}
+						else{
+							processosMortos.Add(processoAtual);
+							Console.WriteLine("---------------------------------- após execucao ");
+							Utils.dump(gp.getVM().m, processoAtual.getAllocatedPages()[0], processoAtual.getAllocatedPages()[processoAtual.getAllocatedPages().Length-1]+16);
+						}
                     }
+                    for(int i = 0; i < processosMortos.Count; i++){
+						processos.Remove(processosMortos[i]);
+					}
+					processosMortos = new List<Processo>();
     			} catch (Exception e) {
     				Console.WriteLine(e);
     			}

@@ -16,16 +16,21 @@ namespace sisop_trab1
 	    //private Word[] memory;
 	    private int[] paginasAlocadas;
         
+        private int CicloEscalonador;
         public CPU(Word[] _m)
         {     // ref a MEMORIA e interrupt handler passada na criacao da CPU
             m = _m;                 // usa o atributo 'm' para acessar a memoria.
             reg = new int[8];       // aloca o espaço dos registradores
+            CicloEscalonador = 0;
         }
 
         public VariaveisPrograma getContext() {
-		    return new VariaveisPrograma(min,max,paginasAlocadas,reg,pc,ir);
+		    return new VariaveisPrograma(min,max,paginasAlocadas,reg,pc,new Word(ir.opc,ir.r1,ir.r2,ir.p));
 	    }
 
+        public String getMSG(){
+            return msg;
+        }
         public void setContext(VariaveisPrograma vp)
         {  // no futuro esta funcao vai ter que ser 
             this.min = vp.getMin();
@@ -34,6 +39,7 @@ namespace sisop_trab1
 		    this.pc = vp.getpc();
 		    this.reg = vp.getregistradores();
 		    this.interruption = false;
+            this.ir = m[min];
         }
 
         private bool isLegal(int e) { // dar um nome melhor para este metodo
@@ -50,6 +56,11 @@ namespace sisop_trab1
             while (true)
             {           // ciclo de instrucoes. acaba cfe instrucao, veja cada caso.
                         // FETCH
+                if(CicloEscalonador > 5){
+                    interruption = true;
+                    msg = "proximo processo";
+                    CicloEscalonador = 0;
+                }
                 if (isLegal(pc)) {
                     ir = m[pc];     // busca posicao da memoria apontada por pc, guarda em ir
                                      // EXECUTA INSTRUCAO NO ir
@@ -231,6 +242,7 @@ namespace sisop_trab1
                     Console.WriteLine(msg);
                     break; // break sai do loop da cpu
                 }
+                CicloEscalonador++;
             }
             
         }

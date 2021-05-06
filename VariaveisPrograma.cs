@@ -8,15 +8,15 @@ namespace sisop_trab1
         private int[] paginasAlocadas;
         private int[] registradores;
         private int pc;
-        private Word p;
+        private Word ir;
     
-        public VariaveisPrograma(int min, int max, int[] paginasAlocadas, int[] registradores, int pc, Word p) {
+        public VariaveisPrograma(int min, int max, int[] paginasAlocadas, int[] registradores, int pc, Word ir) {
             this.min = min;
             this.max = max;
             this.paginasAlocadas = paginasAlocadas;
             this.registradores = registradores;
             this.pc = pc;
-            this.p = p;
+            this.ir = ir;
         }
     
         public int getMin() {
@@ -40,8 +40,8 @@ namespace sisop_trab1
             return pc;
         }
     
-        public Word getp() {
-            return p;
+        public Word getir() {
+            return ir;
         }
     
     }

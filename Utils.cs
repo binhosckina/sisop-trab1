@@ -25,12 +25,5 @@ namespace sisop_trab1
             }
         }
 
-        static public void carga(Word[] p, Word[] m)
-        {
-            for (int i = 0; i < p.Length; i++)
-            {
-                m[i].opc = p[i].opc; m[i].r1 = p[i].r1; m[i].r2 = p[i].r2; m[i].p = p[i].p;
-            }
-        }
     }
 }

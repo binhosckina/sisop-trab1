@@ -14,13 +14,15 @@ namespace sisop_trab1
             this.vm = vm;
             this.proc = proc;
         }
-
+        public VM getVM(){
+            return vm;
+        }
         public LinkedList<Processo> getProcList(){
             return proc;
         }
         public Processo criaProcesso(Word[] p){
             int[] paginasAlocadas = gm.aloca(p);
-            Processo processo = new Processo(process_id, paginasAlocadas);
+            Processo processo = new Processo(process_id, paginasAlocadas, vm.m[paginasAlocadas[0]]);
             process_id++;
             proc.AddLast(processo);
             return processo;

@@ -19,7 +19,8 @@ namespace sisop_trab1
             SO.runProgMinimo(s.vm);
             SO.runProgMinimo(s.vm);
             SO.runProgMinimo(s.vm);
-            SO.runProgMinimo(s.vm);
+            //SO.runProgMinimo(s.vm);
+            SO.EscalonadorRun();
             //SO.runP4(s.vm);
         }
     }

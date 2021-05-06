@@ -2,8 +2,8 @@
 {
     public class Program
     {
-
-        public static Word[] progMinimo = new Word[] {
+        public Program(){
+            this.progMinimo =  new Word[] {
                 new Word(Opcode.LDI, 0, -1, 999),
                 new Word(Opcode.STD, 0, -1, 10),
                 new Word(Opcode.STD, 0, -1, 11),
@@ -12,8 +12,7 @@
                 new Word(Opcode.STD, 0, -1, 14),
                 new Word(Opcode.STOP, -1, -1, -1)
             };
-
-        public static Word[] fibonacci10 = new Word[] { // mesmo que prog exemplo, so que usa r0 no lugar de r8
+            this.fibonacci10= new Word[] { // mesmo que prog exemplo, so que usa r0 no lugar de r8
                 new Word(Opcode.LDI, 1, -1, 0),
                 new Word(Opcode.STD, 1, -1, 20), //50 
                 new Word(Opcode.LDI, 2, -1, 1),
@@ -32,8 +31,7 @@
                 new Word(Opcode.JMPIG, 6, 7, -1),
                 new Word(Opcode.STOP, -1, -1, -1)
             };
-
-        public static Word[] P3 = new Word[] {
+            this.P3 = new Word[] {
             new Word(Opcode.LDI, 0, -1, 5),
 
             new Word(Opcode.DATA, -1, -1, 6), // guarda a posição para o calculo do fatorial
@@ -57,14 +55,7 @@
             new Word(Opcode.STOP, -1, -1, -1)
         };
 
-        /*
-            r0 = tamanho do array
-            r1 = valor 1
-            r2 = valor 2
-            r3 = 
-            r4 = 
-        */
-        public static Word[] P4 = new Word[] {
+            this.P4 = new Word[] {
             new Word(Opcode.DATA, -1, -1, 7), // 0 loop posição atual do array
             new Word(Opcode.DATA, -1, -1, 4), // 1 loop posição inicial do array
             new Word(Opcode.DATA, -1, -1, 20), // 2 guarda a posição inicia do array
@@ -100,5 +91,20 @@
 
             new Word(Opcode.STOP, -1, -1, -1)
         };
+        }
+        public Word[] progMinimo;
+
+        public Word[] fibonacci10;
+
+        public Word[] P3;
+        /*
+            r0 = tamanho do array
+            r1 = valor 1
+            r2 = valor 2
+            r3 = 
+            r4 = 
+        */
+        public Word[] P4;
+
     }
 }
