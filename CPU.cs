@@ -135,10 +135,9 @@ namespace sisop_trab1
                             break;
 
                         case Opcode.STX: // 20. [Rd] ←Rs
-                            if (isLegal(reg[ir.r1])) {
-                                m[reg[ir.r1]].opc = Opcode.DATA;
-                                m[reg[ir.r1]].p = reg[ir.r2];
-                            }
+                            m[reg[ir.r1]].opc = Opcode.DATA;
+                            m[reg[ir.r1]].p = reg[ir.r2];
+                            
                             pc++;
                             break;
 
