@@ -6,6 +6,7 @@ namespace sisop_trab1
     public class SO
     {
         public VM vm;
+        public Interruption interruption;
         private static LinkedList<Processo> processos;
         private static GM gm;
         private static GP gp;
@@ -13,7 +14,8 @@ namespace sisop_trab1
         public SO()
         {
             processos = new LinkedList<Processo>();
-            vm = new VM();
+            Interruption interruption = new Interruption();
+            vm = new VM(interruption);
             gm = new GM(vm.m);
             gp = new GP(gm, vm, processos);
             es = new Escalonador(gp, vm.cpu);

@@ -8,7 +8,7 @@ namespace sisop_trab1
         private int pc;             // ... composto de program counter,
         private Word ir;            // instruction register,
         private int[] reg;          // registradores da CPU
-        private bool interruption = false;
+        private Interruption interruption;
         string msg; // messagem da interrupção
         private Word[] m;   // CPU acessa MEMORIA, guarda referencia 'm' a ela. memoria nao muda. ee sempre a mesma.
         private int min;
@@ -17,35 +17,35 @@ namespace sisop_trab1
 	    private int[] paginasAlocadas;
         
         private int CicloEscalonador;
-        public CPU(Word[] _m)
+        public CPU(Word[] _m, Interruption interruption)
         {     // ref a MEMORIA e interrupt handler passada na criacao da CPU
-            m = _m;                 // usa o atributo 'm' para acessar a memoria.
-            reg = new int[8];       // aloca o espaço dos registradores
-            CicloEscalonador = 0;
+            this.m = _m;                 // usa o atributo 'm' para acessar a memoria.
+            this.reg = new int[8];       // aloca o espaço dos registradores
+            this.CicloEscalonador = 0;
+            this.interruption = interruption; 
         }
 
-        public VariaveisPrograma getContext() {
-		    return new VariaveisPrograma(min,max,paginasAlocadas,reg,pc,new Word(ir.opc,ir.r1,ir.r2,ir.p));
+        public Contexto getContext() {
+		    return new Contexto(min,max,paginasAlocadas,reg,pc,new Word(ir.opc,ir.r1,ir.r2,ir.p), this.interruption);
 	    }
 
         public String getMSG(){
             return msg;
         }
-        public void setContext(VariaveisPrograma vp)
+        public void setContext(Contexto vp)
         {  // no futuro esta funcao vai ter que ser 
             this.min = vp.getMin();
 		    this.max = vp.getMax();
 		    this.paginasAlocadas = vp.getPaginasAlocadas();
 		    this.pc = vp.getpc();
 		    this.reg = vp.getregistradores();
-		    this.interruption = false;
+		    this.interruption = vp.getInterruption();
             this.ir = m[min];
         }
 
         private bool isLegal(int e) { // dar um nome melhor para este metodo
 		    if ((e < min) || (e > max)) {
-		    	interruption = true;
-                msg = "Endereço invalido";
+		    	this.interruption.setInterruption("Endereço invalido");
 		    	return false;
 		    }
 		    return true;
@@ -57,8 +57,7 @@ namespace sisop_trab1
             {           // ciclo de instrucoes. acaba cfe instrucao, veja cada caso.
                         // FETCH
                 if(CicloEscalonador > 5){
-                    interruption = true;
-                    msg = "proximo processo";
+                    this.interruption.setInterruption("proximo processo");
                     CicloEscalonador = 0;
                 }
                 if (isLegal(pc)) {
@@ -204,8 +203,7 @@ namespace sisop_trab1
                         //     break;
 
                         case Opcode.STOP: // 10. por enquanto, para execucao
-                            msg = "Fim de execução";
-                            interruption = true;
+                            this.interruption.setInterruption("Fim de execução");
                             break;
 
                         case Opcode.DATA:
@@ -236,9 +234,9 @@ namespace sisop_trab1
                     }
                 }
                 // VERIFICA INTERRUPÇÃO !!! - TERCEIRA FASE DO CICLO DE INSTRUÇÕES
-                if (interruption)
+                if (interruption.getstate())
                 {
-                    Console.WriteLine(msg);
+                    Console.WriteLine(interruption.getmsg());
                     break; // break sai do loop da cpu
                 }
                 CicloEscalonador++;

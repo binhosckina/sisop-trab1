@@ -8,14 +8,15 @@ namespace sisop_trab1
         public int tamMem;
         public Word[] m;
         public CPU cpu;
-        public VM()
+    
+        public VM(Interruption itr)
         {   // vm deve ser configurada com endereço de tratamento de interrupcoes
             // memória
             tamMem = 1024; 
             m = new Word[tamMem];
             for (int i = 0; i < tamMem; i++) { m[i] = new Word(Opcode.___, -1, -1, -1); };
             // cpu
-            cpu = new CPU(m);
+            cpu = new CPU(m, itr);
         }
     }
 }
