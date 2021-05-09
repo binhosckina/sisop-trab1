@@ -5,6 +5,8 @@ namespace sisop_trab1
     public class Processo
     {
         private int id;
+
+        private String name;
         private int[] paginasAlocadas;
         private Contexto contexto;
 
@@ -19,6 +21,15 @@ namespace sisop_trab1
             return this.paginasAlocadas;
         }
 
+        public void setName(String name){
+            this.name = name+'_'+id;
+        }
+        public void resetInterruption(){
+            this.contexto.reset();
+        }
+        public String getName(){
+            return this.name;
+        }
         public int getId(){
             return id;
         }

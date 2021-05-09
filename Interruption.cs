@@ -7,7 +7,6 @@ namespace sisop_trab1
         private String msg;
         private bool state;
 
-        public bool morto;
         public Interruption(){
             this.msg = null;
             this.state = false;

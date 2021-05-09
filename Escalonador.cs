@@ -6,7 +6,6 @@ namespace sisop_trab1
     public class Escalonador {
 
     	private LinkedList<Processo> processos;
-    	private Processo processoAtual;
     	private CPU cpu;
 
 		private List<Processo> processosMortos;
@@ -27,17 +26,19 @@ namespace sisop_trab1
     				}
                     foreach (Processo processo in processos)
                     {
-                        this.processoAtual = processo;
-    				    cpu.setContext(processoAtual.GetVariaveisPrograma());
+    				    cpu.setContext(processo.GetVariaveisPrograma());
 						cpu.run();
-						if(cpu.getMSG() == "proximo processo" ){
-							processoAtual.setVariaveisPrograma(cpu.getContext());
-							break;
+						if(cpu.getCpuInterruption().getmsg() == "proximo processo" ){
+							cpu.setInterruption(new Interruption());
+							processo.setVariaveisPrograma(cpu.getContext());
+							//processo.resetInterruption();
+							continue;
 						}
 						else{
-							processosMortos.Add(processoAtual);
+							processosMortos.Add(processo);
 							Console.WriteLine("---------------------------------- após execucao ");
-							Utils.dump(gp.getVM().m, processoAtual.getAllocatedPages()[0], processoAtual.getAllocatedPages()[processoAtual.getAllocatedPages().Length-1]+16);
+							Utils.dump(gp.getVM().m, processo.getAllocatedPages()[0], processo.getAllocatedPages()[processo.getAllocatedPages().Length-1]+16);
+							cpu.setInterruption(new Interruption());
 						}
                     }
                     for(int i = 0; i < processosMortos.Count; i++){
@@ -48,14 +49,6 @@ namespace sisop_trab1
     				Console.WriteLine(e);
     			}
     		}
-    	}
-
-    	public Processo getPA() {
-    		return processoAtual;
-    	}
-
-    	public void setPANull(){
-    		this.processoAtual = null;
     	}
 
     	public LinkedList<Processo> getProntos() {

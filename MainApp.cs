@@ -11,15 +11,27 @@ namespace sisop_trab1
 
     class MainApp
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             SO s = new SO();
-            //SO.runFibonacci(s.vm);
+        
+            SO.runFibonacci(s.vm);
+            SO.runFibonacci(s.vm);
             //SO.runP3(s.vm);
-            //SO.runProgMinimo(s.vm);
-            //SO.runProgMinimo(s.vm);
-            //SO.runP4(s.vm);
+            
+            SO.runProgMinimo(s.vm);
+            SO.runProgMinimo(s.vm);
+            SO.runProgMinimo(s.vm);
+            SO.runProgMinimo(s.vm);
+            SO.runFibonacci(s.vm);
+            SO.runFibonacci(s.vm);
+            SO.runFibonacci(s.vm);
+            SO.runFibonacci(s.vm);
+            SO.runProgMinimo(s.vm);
+            SO.ShowProcessos();
             SO.EscalonadorRun();
+            //SO.ShowProcessos();
+            
         }
     }
 }

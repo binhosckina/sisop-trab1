@@ -21,6 +21,12 @@ namespace sisop_trab1
             es = new Escalonador(gp, vm.cpu);
         }
 
+        static public void ShowProcessos(){
+            foreach (Processo proc in processos)
+            {
+                Console.WriteLine(proc.getName()+"-------"+proc.getAllocatedPages());
+            }
+        }
         static public void EscalonadorRun(){
             es.run();
         }
@@ -30,8 +36,9 @@ namespace sisop_trab1
             Program program = new Program();
             Word[] p = program.fibonacci10;
             Processo proc = gp.criaProcesso(p);
+            proc.setName("fibonacci");
             //Utils.carga(p, vm.m);
-            processos.AddLast(proc);
+            //processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
             //Console.WriteLine("---------------------------------- após execucao ");
@@ -46,6 +53,7 @@ namespace sisop_trab1
             Program program = new Program();
             Word[] p = program.progMinimo;
             Processo proc = gp.criaProcesso(p);
+            proc.setName("progMinimo");
             //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
@@ -62,6 +70,7 @@ namespace sisop_trab1
             Program program = new Program();
             Word[] p = program.P3;
             Processo proc = gp.criaProcesso(p);
+            proc.setName("p3");
             //Utils.carga(p, vm.m);
             //proc.setVariaveisPrograma(vm.cpu.getContext());
             //processos.AddLast(proc);
@@ -78,6 +87,7 @@ namespace sisop_trab1
             Program program = new Program();
             Word[] p = program.P4;
             Processo proc = gp.criaProcesso(p);
+            proc.setName("p4");
             //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);

@@ -53,7 +53,7 @@ namespace sisop_trab1
                     aux++;
                 }
             }
-            Console.WriteLine("Frames alocados: "+(framesAlocados.Length+1));
+            Console.WriteLine("---------------------------------- frames alocados: "+(framesAlocados.Length));
             return framesAlocados;
         }
 

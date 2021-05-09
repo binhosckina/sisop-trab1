@@ -29,8 +29,11 @@ namespace sisop_trab1
 		    return new Contexto(min,max,paginasAlocadas,reg,pc,new Word(ir.opc,ir.r1,ir.r2,ir.p), this.interruption);
 	    }
 
-        public String getMSG(){
-            return msg;
+        public Interruption getCpuInterruption(){
+            return this.interruption;
+        }
+        public void setInterruption(Interruption interruption){
+            this.interruption = interruption;
         }
         public void setContext(Contexto vp)
         {  // no futuro esta funcao vai ter que ser 
@@ -56,11 +59,11 @@ namespace sisop_trab1
             while (true)
             {           // ciclo de instrucoes. acaba cfe instrucao, veja cada caso.
                         // FETCH
-                if(CicloEscalonador > 5){
+                if(CicloEscalonador > 4){
                     this.interruption.setInterruption("proximo processo");
-                    CicloEscalonador = 0;
+                    this.CicloEscalonador = 0;
                 }
-                if (isLegal(pc)) {
+                if (isLegal(pc) && interruption.getstate() == false) {
                     ir = m[pc];     // busca posicao da memoria apontada por pc, guarda em ir
                                      // EXECUTA INSTRUCAO NO ir
                     switch (ir.opc)

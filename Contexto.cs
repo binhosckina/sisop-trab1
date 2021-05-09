@@ -33,6 +33,10 @@ namespace sisop_trab1
         public int getMax() {
             return max;
         }
+
+        public void reset(){
+            this.interruption = new Interruption();
+        }
     
         public int[] getPaginasAlocadas() {
             return paginasAlocadas;
