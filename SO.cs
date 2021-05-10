@@ -24,7 +24,7 @@ namespace sisop_trab1
         static public void ShowProcessos(){
             foreach (Processo proc in processos)
             {
-                Console.WriteLine(proc.getName()+"-------"+proc.getAllocatedPages());
+                Console.WriteLine(proc.getName());
             }
         }
         static public void EscalonadorRun(){
@@ -40,7 +40,7 @@ namespace sisop_trab1
             //Utils.carga(p, vm.m);
             //processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             //vm.cpu.run();
@@ -56,7 +56,7 @@ namespace sisop_trab1
             proc.setName("progMinimo");
             //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
             Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
@@ -75,7 +75,7 @@ namespace sisop_trab1
             //proc.setVariaveisPrograma(vm.cpu.getContext());
             //processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
             Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
@@ -90,11 +90,20 @@ namespace sisop_trab1
             proc.setName("p4");
             //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
-            Utils.dump(vm.m, proc.getAllocatedPages()[0], proc.getAllocatedPages()[proc.getAllocatedPages().Length-1]+16);
+            Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
             Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
             //Utils.dump(vm.m, 0, 36);
+        }
+
+        static public void showFrames(){
+            int i = 0;
+            foreach (Frame f in gm.frameList)
+            {
+                Console.WriteLine(i+"----"+f.getAlocado());
+                i++;
+            }
         }
 
     }

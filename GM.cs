@@ -11,12 +11,21 @@ namespace sisop_trab1
 		private int tamPag;
 		private int frames;
 
+        public List<Frame> frameList;
 
+        private List<Frame> framesProc;
 		public GM(Word[] m)
 		{
 			this.m = m;
 			tamPag = 16;
 			frames = m.Length / tamPag;
+            frameList = new List<Frame>();
+            for(int i = 0; i < frames; i++){
+                Frame f = new Frame();
+                f.inicio = 16*i;
+                f.fim = f.inicio + 15;
+                frameList.Add(f);
+            }
             memoriaLivre = m.Length;
 		}
 
@@ -25,45 +34,59 @@ namespace sisop_trab1
         }
 	
 
-        public int[] aloca(Word[] p)
+        public List<Frame> aloca(Word[] p)
         {
             
             int pages = p.Length / tamPag;
             if (p.Length % tamPag > 0) pages++;
-            int[] framesAlocados = new int[pages];
-            
-            if(pages*tamPag > memoriaLivre || pages == 0){
-                throw new Exception("Memoria cheia");
-            }else{
-                for (int i = 0; i < pages; i++)
-                {
-                  memoriaLivre = memoriaLivre - tamPag;
-                  framesAlocados[i] = this.m.Length - memoriaLivre - tamPag;
-                }
-                int aux = framesAlocados[0];
-                int aux2 = 0;
-                foreach (Word item in p)
-                {
-                    if( item.p > (framesAlocados[framesAlocados.Length-1]+16) || item.p < framesAlocados[0] ){
-                        item.p = (framesAlocados[framesAlocados.Length-1]+15) - aux2;
-                        aux2 ++;
+            int[] memoriaAlocados = new int[pages];
+            framesProc = new List<Frame>();
+
+
+            int count = 0;
+            for(int i = 0; i < frameList.Count-pages; i++){
+                if(count == pages){
+                    for(int j = count; j > 0; j--){
+                        i--;
+                        framesProc.Add(frameList[i]);
+                        frameList[i].aloca();
                     }
-                    m[aux] = item;
-                    
-                    aux++;
+                    break;
+                }
+                else{
+                    if(frameList[i].getAlocado() == false ){
+                        count++;
+                    }else{
+                        count = 0;
+                    }
                 }
             }
-            Console.WriteLine("---------------------------------- frames alocados: "+(framesAlocados.Length));
-            return framesAlocados;
+
+         
+            int aux = framesProc[framesProc.Count-1].inicio;
+            int aux2 = 0;
+            foreach (Word item in p)
+            {
+                if( item.p > (framesProc[0].fim) || item.p < framesProc[framesProc.Count-1].inicio ){
+                    item.p = (framesProc[0].fim) - aux2;
+                    aux2 ++;
+                }
+                m[aux] = item;
+                
+                aux++;
+            }
+            
+            Console.WriteLine("---------------------------------- frames alocados: "+(framesProc.Count));
+            return framesProc;
         }
 
 
         public void desaloca(Processo p)
         {
-            int[] pages = p.getAllocatedPages();
-            for (int i = 0; i < pages.Length; i++)
+            List<Frame> pages = p.getFrames();
+            for (int i = 0; i < pages.Count; i++)
             {
-                memoriaLivre = memoriaLivre + tamPag;
+                pages[i].desaloca();
             }
         }
     }

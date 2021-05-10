@@ -22,7 +22,7 @@ namespace sisop_trab1
     		while(true){
     			try{
     				if(processos.Count == 0){
-    					continue;
+    					break;
     				}
                     foreach (Processo processo in processos)
                     {
@@ -37,12 +37,12 @@ namespace sisop_trab1
 						else{
 							processosMortos.Add(processo);
 							Console.WriteLine("---------------------------------- após execucao ");
-							Utils.dump(gp.getVM().m, processo.getAllocatedPages()[0], processo.getAllocatedPages()[processo.getAllocatedPages().Length-1]+16);
+							Utils.dump(gp.getVM().m, processo.getFrames()[0].inicio, processo.getFrames()[processo.getFrames().Count-1].fim);
 							cpu.setInterruption(new Interruption());
 						}
                     }
                     for(int i = 0; i < processosMortos.Count; i++){
-						processos.Remove(processosMortos[i]);
+						gp.finalizaProcesso(processosMortos[i]);
 					}
 					processosMortos = new List<Processo>();
     			} catch (Exception e) {

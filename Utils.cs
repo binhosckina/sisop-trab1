@@ -19,7 +19,7 @@ namespace sisop_trab1
 
         static public void dump(Word[] m, int ini, int fim)
         {
-            for (int i = ini; i < fim; i++)
+            for (int i = ini; i < fim+1; i++)
             {
                 Console.Write(i); Console.Write(":  "); dump(m[i]);
             }

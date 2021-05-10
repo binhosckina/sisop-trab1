@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace sisop_trab1
 {
@@ -7,18 +8,18 @@ namespace sisop_trab1
         private int id;
 
         private String name;
-        private int[] paginasAlocadas;
+        private List<Frame> frames;
         private Contexto contexto;
 
         public bool morto;
-        public Processo(int id, int[] paginasAlocadas, Word ir){
+        public Processo(int id, List<Frame> frames, Word ir){
             this.id= id;
-            this.paginasAlocadas = paginasAlocadas;
-            this.contexto = new Contexto(paginasAlocadas[0],paginasAlocadas[paginasAlocadas.Length-1]+16,paginasAlocadas,new int[8], paginasAlocadas[0], ir, new Interruption());
+            this.frames = frames;
+            this.contexto = new Contexto(frames[frames.Count-1].inicio,frames[0].fim,frames.Count,new int[8], frames[0].inicio, ir, new Interruption());
         }
 
-        public int[] getAllocatedPages(){
-            return this.paginasAlocadas;
+        public List<Frame> getFrames(){
+            return this.frames;
         }
 
         public void setName(String name){

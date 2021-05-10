@@ -14,7 +14,7 @@ namespace sisop_trab1
         private int min;
         private int max;
 	    //private Word[] memory;
-	    private int[] paginasAlocadas;
+	    private int paginasAlocadas;
         
         private int CicloEscalonador;
         public CPU(Word[] _m, Interruption interruption)

@@ -16,20 +16,26 @@ namespace sisop_trab1
             SO s = new SO();
         
             SO.runFibonacci(s.vm);
+            SO.showFrames();
             SO.runFibonacci(s.vm);
-            //SO.runP3(s.vm);
-            
-            SO.runProgMinimo(s.vm);
-            SO.runProgMinimo(s.vm);
-            SO.runProgMinimo(s.vm);
-            SO.runProgMinimo(s.vm);
-            SO.runFibonacci(s.vm);
-            SO.runFibonacci(s.vm);
-            SO.runFibonacci(s.vm);
-            SO.runFibonacci(s.vm);
-            SO.runProgMinimo(s.vm);
-            SO.ShowProcessos();
+            SO.showFrames();
             SO.EscalonadorRun();
+            SO.runFibonacci(s.vm);
+            SO.showFrames();
+            SO.EscalonadorRun();
+            //SO.runP3(s.vm);
+            //SO.runProgMinimo(s.vm);
+            //SO.runProgMinimo(s.vm);
+            //SO.runProgMinimo(s.vm);
+            //SO.runProgMinimo(s.vm);
+            //SO.runFibonacci(s.vm);
+            //SO.runFibonacci(s.vm);
+            //SO.runFibonacci(s.vm);
+            //SO.runFibonacci(s.vm);
+            //SO.runProgMinimo(s.vm);
+            //SO.ShowProcessos();
+            
+            
             //SO.ShowProcessos();
             
         }

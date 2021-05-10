@@ -21,8 +21,9 @@ namespace sisop_trab1
             return proc;
         }
         public Processo criaProcesso(Word[] p){
-            int[] paginasAlocadas = gm.aloca(p);
-            Processo processo = new Processo(process_id, paginasAlocadas, vm.m[paginasAlocadas[0]]);
+            List<Frame> f = new List<Frame>();
+            f = gm.aloca(p);
+            Processo processo = new Processo(process_id, f, vm.m[f[0].inicio]);
             process_id++;
             proc.AddLast(processo);
             return processo;
