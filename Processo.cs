@@ -11,7 +11,6 @@ namespace sisop_trab1
         private List<Frame> frames;
         private Contexto contexto;
 
-        public bool morto;
         public Processo(int id, List<Frame> frames, Word ir){
             this.id= id;
             this.frames = frames;

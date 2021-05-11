@@ -57,7 +57,6 @@ namespace sisop_trab1
             //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
-            Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.setContext(processos.First.Value.GetVariaveisPrograma()); 
             //vm.cpu.run();
@@ -76,7 +75,6 @@ namespace sisop_trab1
             //processos.AddLast(proc);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
-            Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
             //Utils.dump(vm.m, 0, 15);
@@ -91,7 +89,6 @@ namespace sisop_trab1
             //Utils.carga(p, vm.m);
             Console.WriteLine("---------------------------------- programa carregado ");
             Utils.dump(vm.m, proc.getFrames()[proc.getFrames().Count-1].inicio, proc.getFrames()[0].fim);
-            Console.WriteLine("Memoria livre: "+ gm.getMemoriaLivre());
             //Console.WriteLine("---------------------------------- após execucao ");
             //vm.cpu.run();
             //Utils.dump(vm.m, 0, 36);
