@@ -9,7 +9,7 @@ namespace sisop_trab1
         private Word ir;            // instruction register,
         private int[] reg;          // registradores da CPU
         private Interruption interruption;
-        string msg; // messagem da interrupção
+  
         private Word[] m;   // CPU acessa MEMORIA, guarda referencia 'm' a ela. memoria nao muda. ee sempre a mesma.
         private int min;
         private int max;
@@ -109,7 +109,7 @@ namespace sisop_trab1
                             }
                             catch (OverflowException e){
                                 ir.opc = Opcode.STOP; // 
-                                msg = "Overflow"; // messagem da interrupção
+                                interruption.setInterruption("Overflow"); // messagem da interrupção
                             }
                             pc++;
                             break;
@@ -120,7 +120,7 @@ namespace sisop_trab1
                             }
                             catch (OverflowException e){
                                 ir.opc = Opcode.STOP; // 
-                                msg = "Overflow"; // messagem da interrupção
+                                 interruption.setInterruption("Overflow"); // messagem da interrupção
                             }
                             pc++;
                             break;
@@ -131,7 +131,7 @@ namespace sisop_trab1
                             }
                             catch (OverflowException e){
                                 ir.opc = Opcode.STOP; // 
-                                msg = "Overflow"; // messagem da interrupção
+                                 interruption.setInterruption("Overflow"); // messagem da interrupção
                             }
                             pc++;
                             break;
@@ -149,7 +149,7 @@ namespace sisop_trab1
                             }
                             catch (OverflowException e){
                                 ir.opc = Opcode.STOP; // 
-                                msg = "Overflow"; // messagem da interrupção
+                                 interruption.setInterruption("Overflow"); // messagem da interrupção
                             }
                             pc++;
                             break;
@@ -160,7 +160,7 @@ namespace sisop_trab1
                             }
                             catch (OverflowException e){
                                 ir.opc = Opcode.STOP; // 
-                                msg = "Overflow"; // messagem da interrupção
+                                 interruption.setInterruption("Overflow"); // messagem da interrupção
                             }
                             pc++;
                             break;
@@ -220,7 +220,7 @@ namespace sisop_trab1
                                     reg[8] = valor;
                                 }else{
                                     ir.opc = Opcode.STOP; // 
-                                    msg = "Tipo de entrada invalido"; // messagem da interrupção
+                                     interruption.setInterruption("Tipo de entrada invalido"); // messagem da interrupção
                                 }
                             }
                             if (reg[7] == 2){
@@ -231,7 +231,7 @@ namespace sisop_trab1
 
                         default:
                             ir.opc = Opcode.STOP; // 
-                            msg = "Instrução inválida: a instrução carregada é inválida"; // messagem da interrupção
+                            interruption.setInterruption("Instrução inválida: a instrução carregada é inválida"); // messagem da interrupção
                             pc++;
                             break;
                     }

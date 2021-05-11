@@ -37,7 +37,7 @@ namespace sisop_trab1
 						else{
 							processosMortos.Add(processo);
 							Console.WriteLine("---------------------------------- após execucao ");
-							Utils.dump(gp.getVM().m, processo.getFrames()[0].inicio, processo.getFrames()[processo.getFrames().Count-1].fim);
+							Utils.dump(gp.getVM().m, processo.getFrames()[processo.getFrames().Count-1].inicio, processo.getFrames()[0].fim);
 							cpu.setInterruption(new Interruption());
 						}
                     }

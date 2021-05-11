@@ -23,7 +23,7 @@ namespace sisop_trab1
         public Processo criaProcesso(Word[] p){
             List<Frame> f = new List<Frame>();
             f = gm.aloca(p);
-            Processo processo = new Processo(process_id, f, vm.m[f[0].inicio]);
+            Processo processo = new Processo(process_id, f, vm.m[f[f.Count-1].inicio]);
             process_id++;
             proc.AddLast(processo);
             return processo;

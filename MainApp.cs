@@ -22,8 +22,8 @@ namespace sisop_trab1
             SO.EscalonadorRun();
             SO.runFibonacci(s.vm);
             SO.showFrames();
-            SO.EscalonadorRun();
             //SO.runP3(s.vm);
+            SO.EscalonadorRun();
             //SO.runProgMinimo(s.vm);
             //SO.runProgMinimo(s.vm);
             //SO.runProgMinimo(s.vm);

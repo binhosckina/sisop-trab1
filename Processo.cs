@@ -15,7 +15,7 @@ namespace sisop_trab1
         public Processo(int id, List<Frame> frames, Word ir){
             this.id= id;
             this.frames = frames;
-            this.contexto = new Contexto(frames[frames.Count-1].inicio,frames[0].fim,frames.Count,new int[8], frames[0].inicio, ir, new Interruption());
+            this.contexto = new Contexto(frames[frames.Count-1].inicio,frames[0].fim,frames.Count,new int[8], frames[frames.Count-1].inicio, ir, new Interruption());
         }
 
         public List<Frame> getFrames(){
