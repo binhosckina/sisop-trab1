@@ -31,29 +31,19 @@
                 new Word(Opcode.JMPIG, 6, 7, -1),
                 new Word(Opcode.STOP, -1, -1, -1)
             };
-            this.P3 = new Word[] {
-            new Word(Opcode.LDI, 0, -1, 5),
-
-            new Word(Opcode.DATA, -1, -1, 6), // guarda a posição para o calculo do fatorial
-
-            new Word(Opcode.JMPIGM, -1, 0, 1), // se maior que zero pular para o calculo do fatorial
-            new Word(Opcode.LDI, 0, -1, -1),
-            new Word(Opcode.STD, 0, -1, 10),
+            this.P3 = new Word[]{
+            new Word(Opcode.LDI, 0, -1, 4), //salva o numero a ser calculado o fatorial.
+            new Word(Opcode.LDI, 1, -1, 1),
+            new Word(Opcode.LDI, 6, -1, 1),
+            new Word(Opcode.LDI, 7, -1, 8),
+            new Word(Opcode.JMPIE, 7, 0, 0),
+            new Word(Opcode.MULT, 1, 0, -1),
+            new Word(Opcode.SUB, 0, 6, -1),
+            new Word(Opcode.JMP, -1, -1, 4),
+            new Word(Opcode.STD, 1, 1, 10),
             new Word(Opcode.STOP, -1, -1, -1),
-
-            new Word(Opcode.STD, 0, -1, 20), // calculo do fatorial
-            new Word(Opcode.LDD, 1, -1, 20),
-            new Word(Opcode.SUBI, 1, -1, 1),
-
-            new Word(Opcode.DATA, -1, -1, 10), // guarda a posição para o loop do calculo do fatorial
-
-            new Word(Opcode.MULT, 0, 1, -1),
-            new Word(Opcode.SUBI, 1, -1, 1), // loop do calculo do fatorial
-            new Word(Opcode.JMPIGM, -1, 1, 9), // se r2 > 0 volta pro inicio do loop
-
-            new Word(Opcode.STD, 0, -1, 10),
-            new Word(Opcode.STOP, -1, -1, -1)
-        };
+            new Word(Opcode.DATA, -1, -1, -1),
+            };
 
             this.P4 = new Word[] {
             new Word(Opcode.DATA, -1, -1, 7), // 0 loop posição atual do array
